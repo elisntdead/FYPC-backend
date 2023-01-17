@@ -1,0 +1,59 @@
+{% extends 'main.html' %} {% block pageTitle %} My Favourites 
+{% endblock pageTitle%}{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="myaccount-body">
+      <div class="account-info">
+        {% include 'base/account-switcher.html' %}
+        <div class="account-tabs">
+          <div class="account-tab-favourites">
+            <div class="tab-favourites-filter">
+              <a href="#"><i class="fa-solid fa-filter fa-2xl"></i></a>
+            </div>
+            <div class="tab-favourites">
+              {% for favourite in favourites %}
+              <div class="tab-favourites-item">
+                <div class="item-img">
+                  <a href="{% url 'product' favourite.product.id %}"
+                    ><img
+                      src="{{favourite.product.get_first_image.url}}"
+                      alt="Accessory Image"
+                  /></a>
+                </div>
+                <div class="item-info">
+                  <a href="/product.html"
+                    ><h2>{{favourite.product.name}}</h2></a
+                  >
+                  <p>
+                    Price: <span>{{favourite.product.price}} </span
+                    ><i class="fa-solid fa-ruble-sign"></i>
+                  </p>
+                  <div class="fav-button">
+                    <a href="#"
+                      ><i class="fa-solid fa-star"></i>Remove From Favourites</a
+                    >
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="favourites-pagination">
+              <ul class="pagination-list">
+                <li><a href="#">«</a></li>
+                <li><a class="active" href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#">»</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

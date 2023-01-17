@@ -1,0 +1,32 @@
+{% extends 'main.html' %} {% block pageTitle %}Sign In{% endblock pageTitle %}
+{%block content %}
+<section class="section">
+  <div class="container">
+    <div class="login-body">
+      {% if messages %} {% for message in messages %}
+      <h1>{{message}}</h1>
+      {% endfor %}{% endif %}
+      <form class="log-join-form" action="" method="post">
+        {% csrf_token %}
+        <ul>
+          <li>
+            <input type="text" name="login" placeholder="Enter Your Login" />
+          </li>
+          <li>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Your Password"
+            />
+          </li>
+        </ul>
+        <div class="log-join-buttons">
+          <a href="{% url 'join' %}">Join</a>
+          <input type="submit" value="log in" method="post" />
+          <a href="#">I Forgot My Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}

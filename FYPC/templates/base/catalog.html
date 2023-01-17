@@ -1,0 +1,58 @@
+{% extends 'main.html' %}{% block pageTitle %}Catalog{% endblock pageTitle %}
+{%block content %}
+<section class="section">
+  <div class="container">
+    <div class="catalog-body">
+      <div class="page-title">
+        <h1>Catalog: Desktops</h1>
+      </div>
+      <div class="catalog-filter">
+        <a href="#"><i class="fa-solid fa-filter fa-2xl"></i></a>
+        <div class="filter-fields">
+          <form action="" method="get">
+            {{product_filter.form}}
+            <input type="submit" value="Apply Filter" id="">
+          </form>
+        </div>
+        
+        
+      </div>
+      <div class="catalog-cards">
+        {% for product in product_filter.qs %}
+        <div class="catalog-card">
+          <a href="{% url 'product' product.id%}"
+            ><div class="item-img">
+              <img src="{{product.get_first_image.url}}" alt="" width="200px" height="200px"/>
+            </div>
+          </a>
+          <div class="item-info">
+            <a href="{% url 'product' product.id %}"
+              ><h2>{{product.name}}</h2></a
+            >
+            <p>
+              Price: <span>{{product.price}} </span><i class="fa-solid fa-ruble-sign"></i>
+            </p>
+            <div class="item-info-specs">
+              {{product.description}}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="catalog-pagination">
+        <ul class="pagination-list">
+          <li><a href="#">«</a></li>
+          <li><a class="active" href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#">6</a></li>
+          <li><a href="#">7</a></li>
+          <li><a href="#">»</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

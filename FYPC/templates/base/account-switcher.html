@@ -1,0 +1,21 @@
+<div class="account-tabs-switcher">
+  <h1>My Account</h1>
+  <div class="tabs-switcher-item">
+    <input id="ma-option-1" type="radio" name="ma-switch" value="1" checked />
+    <label for="ma-option-1"
+      ><a href="{% url 'account-orders' %}">My Orders</a></label
+    >
+  </div>
+  <div class="tabs-switcher-item">
+    <input id="ma-option-2" type="radio" name="ma-switch" value="2" />
+    <label for="ma-option-2"
+      ><a href="{% url 'account-settings' %}">Account Settings</a></label
+    >
+  </div>
+  <div class="tabs-switcher-item">
+    <input id="ma-option-3" type="radio" name="ma-switch" value="3" />
+    <label for="ma-option-3"
+      ><a href="{% url 'account-favourites' %}">My Favourites</a></label
+    >
+  </div>
+</div>

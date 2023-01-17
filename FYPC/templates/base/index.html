@@ -1,0 +1,161 @@
+{% extends 'main.html' %} {% block pageTitle %}Home{% endblock pageTitle %}
+<!-- Slider main container -->
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="intro-body">
+      <div class="intro-text">
+        <h1>FYPC - For All Your PC Needs!</h1>
+        <p>PCs, Laptops and accessories for tasks of any kind!</p>
+      </div>
+      <div class="swiper slider-small">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="/product.html"
+              ><img src="images/accessory_card.jpg" alt=""
+            /></a>
+          </div>
+          <div class="swiper-slide">
+            <img src="images/desktop_card.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images/laptop_card.jpg" alt="" />
+          </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+    <div class="home-body">
+      <div class="home-subtitle">
+        <h2>Popular</h2>
+      </div>
+      <div class="home-popular">
+        <div class="swiper swiper-grid">
+          <div class="swiper-wrapper">
+            {% comment %} product {% endcomment %} {% for product in popular %}
+            <div class="home-card swiper-slide">
+              <a href="{% url 'product' product.id %}"
+                ><div class="item-img">
+                  <img
+                    src="{{product.get_first_image.url}}"
+                    alt="{{product.name}}'s image"
+                    width="200px"
+                    height="200px"
+                  />
+                </div>
+              </a>
+              <div class="item-info">
+                <a href="{% url 'product' product.id %}"
+                  ><h2>{{product.name}}</h2></a
+                >
+                <p>
+                  Price: <span>{{product.price}}</span
+                  ><i class="fa-solid fa-ruble-sign"></i>
+                </p>
+                <div class="item-info-specs">{{product.description}}</div>
+              </div>
+            </div>
+            {% endfor %} {% for img in popular.images.all %}
+            <img src="{{img.image.url}}" alt="" />{% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="home-subtitle">
+        <h2>Maintenance</h2>
+      </div>
+      <div class="home-maintanance">
+        <div class="swiper swiper-grid">
+          <div class="swiper-wrapper">
+            <div class="home-card swiper-slide">
+              <a href="/product.html"
+                ><div class="item-img">
+                  <img src="images/laptop_card.jpg" alt="" />
+                </div>
+              </a>
+              <div class="item-info">
+                <a href="/product.html"
+                  ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
+                >
+
+                <p>
+                  Price: <span>44.990 </span
+                  ><i class="fa-solid fa-ruble-sign"></i>
+                </p>
+                <div class="item-info-specs">
+                  <ul>
+                    <h3>Product Specifications:</h3>
+                    <li><span>SSD</span>: 512GB</li>
+                    <li><span>CPU</span>: Amude R2222</li>
+                    <li><span>Warranty</span>: 1 year</li>
+                    <li><span>OS</span>: Doors 11</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="home-subtitle">
+        <h2>Why Us?</h2>
+      </div>
+      <div class="home-about">
+        <div class="about-left">
+          <img src="static/images/banner-left.png" alt="Best Parts" />
+        </div>
+        <div class="about-middle">
+          <div class="about-mid-top">
+            <img
+              src="static/images/banner-mid-top.png"
+              alt="Professional Assembly And Repair"
+            />
+          </div>
+          <div class="about-mid-bottom">
+            <img src="static/images/banner-mid-bottom.png" alt="Young Team" />
+          </div>
+        </div>
+        <div class="about-right">
+          <img src="static/images/banner-right.png" alt="Fast Shipping" />
+        </div>
+      </div>
+      <div class="home-subtitle">
+        <h2>Need Any Help?</h2>
+        <div class="home-subtitle-undertext">
+          <p>Fill This For Below And We'll Call You Up!</p>
+        </div>
+      </div>
+      <div class="home-callback">
+        <img src="static/images/callback-img.png" alt="Callback Image" />
+        <form class="callback-form" action="" method="post">
+          <ul>
+            <li>
+              <input type="text" name="name" placeholder="Enter Your Name" />
+            </li>
+            <li>
+              <input
+                type="text"
+                name="phone-number"
+                placeholder="Enter Your Phone Number"
+              />
+            </li>
+            <li>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Your Email Address"
+              />
+            </li>
+            <li>
+              <input type="checkbox" name="agreement" value="Yes" />
+              <label for="agreement">I Agree With Terms Of Serice...</label>
+            </li>
+            <li><input type="button" value="Request Callback" /></li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
