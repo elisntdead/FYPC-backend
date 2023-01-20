@@ -7,8 +7,15 @@ class User(AbstractUser):
   username = models.CharField(max_length=50, null=True, blank=True)
   email = models.EmailField(unique=True, null=True)
   phone = PhoneNumberField(null=True, blank=True)
-  address = models.CharField(max_length=100, null=True, blank=True)
 
 
   USERNAME_FIELD = "email"
   REQUIRED_FIELDS =[]
+
+
+class Client(User):
+  address = models.CharField(max_length=100, null=True, blank=True)
+
+
+class Worker(User):
+  pass

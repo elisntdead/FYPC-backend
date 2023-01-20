@@ -1,0 +1,239 @@
+{% extends 'admin/main.html' %}
+{% block pageTitle %}Clients{% endblock pageTitle %}
+{% block content %}
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/admin-clients.html"
+                >Clients</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/admin-workers.html">Workers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin-orders.html">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin-reviews.html">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin-products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin-bundles.html">Bundles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin-roles.html">Roles</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Others
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li>
+                  <a class="dropdown-item" href="admin-worker-cabinet.html"
+                    >My Work</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/admin-home-settings.html"
+                    >Home Page Settings</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/admin-tags.html">Tags</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/"
+                ><i class="fa-solid fa-right-from-bracket fa-lg me-1"></i
+                ><span>Dmitry</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="container">
+      <div class="shadow-lg my-4 p-3 rounded">
+        <div class="row row-cols-2 row-cols-md-2 row-cols-xl-4">
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="Addon-Name">Name</span>
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Name"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="Addon-Name">Role</span>
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Role"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="Addon-Name">Email</span>
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Email"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="Addon-Name">Phone Number</span>
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Phone Number"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-7 col-xl-4">
+            <label for="date-from">Date Added</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="Addon-Name">From</span>
+              <input
+                type="date"
+                id="date-from"
+                class="form-control"
+                aria-label="Date Added From"
+                aria-describedby="basic-addon1"
+              /><span class="input-group-text" id="Addon-Name">To</span
+              ><input
+                type="date"
+                id="date-to"
+                class="form-control"
+                aria-label="Date Added To"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+          </div>
+          <div class="col-4 col-md-10 col-lg-1 col-xl-4"></div>
+          <div class="col-md-6 col-lg-2">
+            <a href="#"
+              ><button
+                type="button"
+                class="btn btn-danger w-100 fw-bold mt-md-0 mt-lg-4"
+              >
+                Reset
+              </button></a
+            >
+          </div>
+          <div class="col-md-6 col-lg-2 mt-1 mt-md-0">
+            <a href="#"
+              ><button
+                type="button"
+                class="btn btn-success w-100 fw-bold mt-md-0 mt-lg-4"
+              >
+                Apply
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <div class="shadow-lg my-4 p-3 rounded">
+        <button type="button" class="btn btn-primary col-12 fw-bold">
+          Create New Worker
+        </button>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <span class="sort-link"
+                    ><a href="#" class="text-dark"
+                      >ID<i class="fa-solid fa-arrow-up-short-wide"></i></a
+                  ></span>
+                </th>
+                <th scope="col">
+                  <span class="sort-link"
+                    ><a href="#" class="text-dark"
+                      >Name<i class="fa-solid fa-arrow-up-short-wide"></i></a
+                  ></span>
+                </th>
+                <th scope="col">
+                  <span class="sort-link"
+                    ><a href="#" class="text-dark"
+                      >Role<i class="fa-solid fa-arrow-up-short-wide"></i></a
+                  ></span>
+                </th>
+                <th scope="col">
+                  <span class="sort-link"
+                    ><a href="#" class="text-dark"
+                      >Email<i class="fa-solid fa-arrow-up-short-wide"></i></a
+                  ></span>
+                </th>
+                <th scope="col">
+                  <span class="sort-link"
+                    ><a href="#" class="text-dark"
+                      >Phone Number<i
+                        class="fa-solid fa-arrow-up-short-wide"
+                      ></i></a
+                  ></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for worker in workers %}
+              <tr>
+                <th scope="row">
+                  <a href="{% url 'view-worker' worker.id %}" class="text-dark">{{worker.id}}</a>
+                </th>
+                <td>
+                  <a href="{% url 'view-worker' worker.id %}" class="text-dark">{{worker.username}}</a>
+                </td>
+                <td>Manager</td>
+                <td>{{worker.email}}</td>
+                <td>{{worker.phone}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <nav aria-label="Table Page Changer">
+          <ul class="pagination justify-content-center mb-0">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+            <li class="page-item"><a class="page-link" href="#">7</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+{% endblock %}

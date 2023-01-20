@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "Promo",
     "Image",
     "Tag",
+    "bundles",
+    "custom_admin",
     "phonenumber_field",
 ]
 

@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from Product.models import Product
 from Image.models import Image
-from User.models import User
+from User.models import User, Client
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .filters import ProductFilter
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 
 # Create your views here.
 def Home(request):
@@ -20,8 +21,18 @@ def Contacts(request):
 def Catalog(request):
   products = Product.objects.all().filter(deleted__isnull=True)
   product_filter = ProductFilter(request.GET, queryset=products)
-  context = {"product_filter":product_filter}
+  
+  paginated_products = Paginator(product_filter.qs, 4)
+  page_number = request.GET.get("page")
+  page_obj = paginated_products.get_page(page_number)
+  
+  context = {"product_filter":product_filter, "page_obj":page_obj}
   return render(request, "base/catalog.html", context)
+
+""" paginator = Paginator(product_filter.qs, 4)
+  page_number = request.GET.get("page")
+  page_obj = paginator.get_page(page_number) """
+
 
 @login_required(login_url="login")
 def Cart(request):
@@ -35,7 +46,10 @@ def ProductView(request, pk):
 
 @login_required(login_url="login")
 def AccountOrders(request):
-  return render(request, "base/myaccount-orders.html")
+  client = User.objects.get(id=request.user.id)
+  orders = client.order_set.all()
+  context = {"client":client, "orders":orders}
+  return render(request, "base/myaccount-orders.html",context)
 
 @login_required(login_url="login")
 def AccountFavourites(request):
@@ -70,6 +84,9 @@ def Login(request):
 
   return render(request, "base/login.html")
 
+def Logout(request):
+    logout(request)
+    return redirect('home')
 
 def Join(request):
   return render(request, "base/register.html")

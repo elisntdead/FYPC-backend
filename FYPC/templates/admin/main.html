@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://kit.fontawesome.com/711ce7038c.js  "
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/Gilroy Light/style.css' %}"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="{% static 'fonts/Gilroy/style.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/admin-boostrap.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FYPC | Admin - {% block pageTitle %}{% endblock pageTitle %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
+      <div class="container">
+        <a class="navbar-brand text-info me-5" href="#">
+          <img
+            src="{% static 'images/fypc_logo.png' %}"
+            alt="Logo"
+            width="60"
+            height="60"
+            class="d-inline-block rounded-5 me-2"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse d-lg-flex justify-content-lg-end"
+          id="navbarNav"
+        >
+
+        {% block content %}{% endblock content %}
+    <script
+    src="{% static 'js/bootstrap.bundle.min.js' %}"
+  ></script>
+</body>
+</html>
