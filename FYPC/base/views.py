@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from Product.models import Product
+from django.shortcuts import render, redirect, HttpResponseRedirect
+from Product.models import Product, Favourites
 from Image.models import Image
 from User.models import User, Client
 from django.db.models import Q
@@ -43,6 +43,27 @@ def ProductView(request, pk):
   product_images = product.images.all()
   context = {"product":product, "product_images": product_images}
   return render(request, "base/product.html", context)
+
+@login_required(login_url="login")
+def MarkProduct(request, pk):
+  mark_product = Product.objects.get(id=pk)
+  product_is_marked = Favourites.objects.filter(user=request.user, product=mark_product).exists()
+  if product_is_marked:
+    return redirect("home")
+  else:
+    marked = Favourites.objects.create(
+    user = request.user,
+    product = mark_product
+   )
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+  
+
+@login_required(login_url="login")
+def UnmarkProduct(request, pk):
+  #user_favourites = request.user.favourite_set.all()
+  marked = Favourites.objects.get(product=pk, user = request.user)
+  marked.delete()
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url="login")
 def AccountOrders(request):

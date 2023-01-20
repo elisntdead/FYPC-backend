@@ -21,7 +21,7 @@
                   /></a>
                 </div>
                 <div class="item-info">
-                  <a href="/product.html"
+                  <a href="{% url 'product' favourite.product.id%}"
                     ><h2>{{favourite.product.name}}</h2></a
                   >
                   <p>
@@ -29,7 +29,7 @@
                     ><i class="fa-solid fa-ruble-sign"></i>
                   </p>
                   <div class="fav-button">
-                    <a href="#"
+                    <a href="{% url 'unmark' favourite.product.id%}"
                       ><i class="fa-solid fa-star"></i>Remove From Favourites</a
                     >
                   </div>
