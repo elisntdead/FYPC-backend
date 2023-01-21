@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from Product.models import Product, Favourites
 from Image.models import Image
 from User.models import User, Client
+from Order.models import Order, Order_products
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -11,7 +12,7 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def Home(request):
-  popular = Product.objects.all().order_by('timesBought').filter(deleted__isnull=True)[:2]
+  popular = Product.objects.all().order_by('timesBought').filter(deleted__isnull=True)[:10]
   context = {'popular':popular}
   return render(request, "base/index.html", context)
 
@@ -36,7 +37,28 @@ def Catalog(request):
 
 @login_required(login_url="login")
 def Cart(request):
-  return render(request, "base/cart.html")
+  user = request.user
+  order = Order.objects.get(client=user, status=1)
+  products = order.order_products_set.all()
+  context = {"order":order, "products":products}
+  return render(request, "base/cart.html", context)
+
+@login_required(login_url="login")
+def AddToCart(request, pk):
+  add_product = Product.objects.get(id=pk)
+  cart_order = Order.objects.get(client=request.user, status=1)
+  product = Order_products.objects.create(
+  order = cart_order,
+  product = add_product
+  )
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@login_required(login_url="login")
+def RemoveFromCart(request, pk):
+  cart_order = Order.objects.get(client = request.user, status=1)
+  added = Order_products.objects.get(order = cart_order, product=pk)
+  added.delete()
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def ProductView(request, pk):
   product = Product.objects.get(id=pk)

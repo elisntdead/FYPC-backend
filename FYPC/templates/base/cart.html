@@ -19,186 +19,32 @@
         <a href="#">Confirm Order</a>
       </div>
       <div class="cart-items">
+        {% for product in products %}
         <div class="cart-item">
-          <a href="/product.html"
+          <a href="{% url 'product' product.product.id%}"
             ><div class="item-img">
-              <img src="images/laptop_card.jpg" alt="" />
+              <img src="{{product.product.get_first_image.url}}" alt="" />
             </div>
           </a>
           <div class="item-info">
-            <a href="/product.html"
-              ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
+            <a href="{% url 'product' product.product.id%}"
+              ><h2>{{product.product.name}}</h2></a
             >
 
             <p>
-              Price: <span>44.990 </span><i class="fa-solid fa-ruble-sign"></i>
+              Price: <span>{{product.product.price}} </span><i class="fa-solid fa-ruble-sign"></i>
             </p>
             <div class="item-info-remove">
-              <a href="#"
+              <a href="{% url 'remove-cart' product.product.id%}"
                 ><i class="fa-sharp fa-xl fa-solid fa-delete-left"></i
               ></a>
             </div>
             <div class="item-info-specs">
-              <ul>
-                <h3>Selected Options:</h3>
-                <li><span>SSD</span>: 512GB</li>
-                <li><span>CPU</span>: Amude R2222</li>
-                <li><span>Warranty</span>: 1 year</li>
-                <li><span>OS</span>: Doors 11</li>
-              </ul>
+              {{product.product.description}}
             </div>
           </div>
         </div>
-        <div class="cart-item">
-          <a href="/product.html"
-            ><div class="item-img">
-              <img src="images/laptop_card.jpg" alt="" />
-            </div>
-          </a>
-          <div class="item-info">
-            <a href="/product.html"
-              ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
-            >
-
-            <p>
-              Price: <span>44.990 </span><i class="fa-solid fa-ruble-sign"></i>
-            </p>
-            <div class="item-info-remove">
-              <a href="#"
-                ><i class="fa-sharp fa-xl fa-solid fa-delete-left"></i
-              ></a>
-            </div>
-            <div class="item-info-specs">
-              <ul>
-                <h3>Selected Options:</h3>
-                <li><span>SSD</span>: 512GB</li>
-                <li><span>CPU</span>: Amude R2222</li>
-                <li><span>Warranty</span>: 1 year</li>
-                <li><span>OS</span>: Doors 11</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item">
-          <a href="/product.html"
-            ><div class="item-img">
-              <img src="images/laptop_card.jpg" alt="" />
-            </div>
-          </a>
-          <div class="item-info">
-            <a href="/product.html"
-              ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
-            >
-
-            <p>
-              Price: <span>44.990 </span><i class="fa-solid fa-ruble-sign"></i>
-            </p>
-            <div class="item-info-remove">
-              <a href="#"
-                ><i class="fa-sharp fa-xl fa-solid fa-delete-left"></i
-              ></a>
-            </div>
-            <div class="item-info-specs">
-              <ul>
-                <h3>Selected Options:</h3>
-                <li><span>SSD</span>: 512GB</li>
-                <li><span>CPU</span>: Amude R2222</li>
-                <li><span>Warranty</span>: 1 year</li>
-                <li><span>OS</span>: Doors 11</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item">
-          <a href="/product.html"
-            ><div class="item-img">
-              <img src="images/laptop_card.jpg" alt="" />
-            </div>
-          </a>
-          <div class="item-info">
-            <a href="/product.html"
-              ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
-            >
-
-            <p>
-              Price: <span>44.990 </span><i class="fa-solid fa-ruble-sign"></i>
-            </p>
-            <div class="item-info-remove">
-              <a href="#"
-                ><i class="fa-sharp fa-xl fa-solid fa-delete-left"></i
-              ></a>
-            </div>
-            <div class="item-info-specs">
-              <ul>
-                <h3>Selected Options:</h3>
-                <li><span>SSD</span>: 512GB</li>
-                <li><span>CPU</span>: Amude R2222</li>
-                <li><span>Warranty</span>: 1 year</li>
-                <li><span>OS</span>: Doors 11</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item">
-          <a href="/product.html"
-            ><div class="item-img">
-              <img src="images/laptop_card.jpg" alt="" />
-            </div>
-          </a>
-          <div class="item-info">
-            <a href="/product.html"
-              ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
-            >
-
-            <p>
-              Price: <span>44.990 </span><i class="fa-solid fa-ruble-sign"></i>
-            </p>
-            <div class="item-info-remove">
-              <a href="#"
-                ><i class="fa-sharp fa-xl fa-solid fa-delete-left"></i
-              ></a>
-            </div>
-            <div class="item-info-specs">
-              <ul>
-                <h3>Selected Options:</h3>
-                <li><span>SSD</span>: 512GB</li>
-                <li><span>CPU</span>: Amude R2222</li>
-                <li><span>Warranty</span>: 1 year</li>
-                <li><span>OS</span>: Doors 11</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item">
-          <a href="/product.html"
-            ><div class="item-img">
-              <img src="images/laptop_card.jpg" alt="" />
-            </div>
-          </a>
-          <div class="item-info">
-            <a href="/product.html"
-              ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
-            >
-
-            <p>
-              Price: <span>44.990 </span><i class="fa-solid fa-ruble-sign"></i>
-            </p>
-            <div class="item-info-remove">
-              <a href="#"
-                ><i class="fa-sharp fa-xl fa-solid fa-delete-left"></i
-              ></a>
-            </div>
-            <div class="item-info-specs">
-              <ul>
-                <h3>Selected Options:</h3>
-                <li><span>SSD</span>: 512GB</li>
-                <li><span>CPU</span>: Amude R2222</li>
-                <li><span>Warranty</span>: 1 year</li>
-                <li><span>OS</span>: Doors 11</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
       <div class="cart-pagination">
         <ul class="pagination-list">

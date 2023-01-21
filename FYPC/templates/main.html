@@ -13,6 +13,10 @@
       href="{%static "fonts/Gilroy Light/style.css"%}"
       type="text/css"
     />
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
     <link rel="stylesheet" href="{%static "fonts/Gilroy/style.css"%}" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FYPC - For All Your PC Needs! | {% block pageTitle %}{% endblock pageTitle %}</title>
@@ -112,10 +116,10 @@
   src="https://code.jquery.com/jquery-3.6.3.min.js"
   integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
   crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="{% static 'js/burger-menu.js' %}"></script>
 <script src="{% static 'js/filter-popup.js' %}"></script>
-<script src="node_modules/swiper/swiper-bundle.min.js"></script>
-<script src="js/slider-small.js"></script>
-<script src="js/slider-grid.js"></script>
+<script src="{% static 'js/slider-small.js' %}"></script>
+<script src="{% static 'js/slider-grid.js'%}"></script>
 </body>
 </html>

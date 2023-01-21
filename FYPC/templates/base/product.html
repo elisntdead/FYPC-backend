@@ -9,7 +9,7 @@
             <div class="swiper-wrapper">
               {% for product_image in product_images %}
               <div class="swiper-slide">
-                  ><img src="{{product_image.image.url}}" alt="image"
+                  <img src="{{product_image.image.url}}" alt="image"
                 /></a>
               </div>
               {% endfor %}
@@ -28,7 +28,7 @@
                 Price: <span>{{product.price}} </span
                 ><i class="fa-solid fa-ruble-sign"></i>
               </p>
-              <a href="#"
+              <a href="{% url 'add-cart' product.id%}"
                 ><i class="fa-solid fa-cart-shopping"></i>
                 <span>Add To Cart</span>
               </a>
