@@ -1,9 +1,17 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput, PasswordInput
 from django.contrib.auth.forms import UserCreationForm
-from User.models import Client #подключаем модель которую мы будем обрабатывать формой
+from User.models import User
 """ from django.contrib.auth.models import User """
 
-class UserForm(ModelForm):
+class UserForm(UserCreationForm):
   class Meta:
-    model = User # модель на которую влияет форма
-    fields = ['email'] #так можно заполнять нужные поля для формы
+    model = User
+    fields = ['email', 'password1', 'password2','phone','address']
+    widgets = {
+      'email':TextInput(attrs={'placeholder':'Enter Your Email'}),
+    }
+  
+  def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].widget = PasswordInput(attrs={'placeholder':'Enter Your Password'})
+        self.fields['password2'].widget = PasswordInput(attrs={'placeholder':'Confirm Password'})

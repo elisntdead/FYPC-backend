@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from Product.models import Product, Favourites
 from Image.models import Image
-from User.models import User, Client
+from User.models import User
 from Order.models import Order, Order_products
 from django.db.models import Q
 from django.contrib import messages
@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .filters import ProductFilter
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
+from .forms import UserForm
 
 # Create your views here.
 def Home(request):
@@ -29,10 +30,6 @@ def Catalog(request):
   
   context = {"product_filter":product_filter, "page_obj":page_obj}
   return render(request, "base/catalog.html", context)
-
-""" paginator = Paginator(product_filter.qs, 4)
-  page_number = request.GET.get("page")
-  page_obj = paginator.get_page(page_number) """
 
 
 @login_required(login_url="login")
@@ -103,6 +100,8 @@ def AccountFavourites(request):
 
 @login_required(login_url="login")
 def AccountSettings(request):
+  user = request.user
+  form = UserForm
   return render(request, "base/myaccount-settings.html")
 
 def Login(request):
@@ -132,4 +131,14 @@ def Logout(request):
     return redirect('home')
 
 def Join(request):
-  return render(request, "base/register.html")
+  form = UserForm()
+  if request.method == "POST":
+    form = UserForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect("home")
+    else:
+      messages.error(request, "There's an error during registration")
+  context = {"form":form}
+  return render(request, "base/register.html", context)

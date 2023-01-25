@@ -6,70 +6,73 @@
         {% include 'base/account-switcher.html' %}
         <div class="account-tabs">
           <div class="account-tab-settings">
-            <div class="settings-password">
-              <h3>Password Settings</h3>
-              <ul>
-                <li>
+            <form action="" method="post">
+              <div class="settings-password">
+                <h3>Password Settings</h3>
+                <ul>
+                  <li>
+                    <input
+                      type="password"
+                      name="new-password"
+                      placeholder="Enter New Password"
+                    />
+                  </li>
+                  <li>
+                    <input
+                      type="password"
+                      name="new-password-confirm"
+                      placeholder="Confirm New Password"
+                    />
+                  </li>
+                </ul>
+              </div>
+              <div class="settings-phone-number">
+                <h3>Phone Number Settings</h3>
+                <ul>
+                  <li>
+                    <input
+                      type="text"
+                      name="new-phone-number"
+                      placeholder="Enter New Phone Number"
+                    />
+                  </li>
+                </ul>
+              </div>
+              <div class="settings-address">
+                <h3>Address Settings</h3>
+                <ul>
+                  <li>
+                    <input
+                      type="email"
+                      name="new-delivery-address"
+                      placeholder="Enter New Delivery Address"
+                    />
+                  </li>
+                </ul>
+              </div>
+              <div class="settings-email">
+                <h3>Email Settings</h3>
+                <ul>
+                  <li>
+                    <input
+                      type="email"
+                      name="new-email"
+                      placeholder="Enter New Email Address"
+                    />
+                  </li>
+                </ul>
+              </div>
+              <div class="settings-confirm">
+                <form action="#" class="confirm-form">
                   <input
                     type="password"
-                    name="new-password"
-                    placeholder="Enter New Password"
+                    placeholder="Enter Your Current Password"
                   />
-                </li>
-                <li>
-                  <input
-                    type="password"
-                    name="new-password-confirm"
-                    placeholder="Confirm New Password"
-                  />
-                </li>
-              </ul>
-            </div>
-            <div class="settings-phone-number">
-              <h3>Phone Number Settings</h3>
-              <ul>
-                <li>
-                  <input
-                    type="text"
-                    name="new-phone-number"
-                    placeholder="Enter New Phone Number"
-                  />
-                </li>
-              </ul>
-            </div>
-            <div class="settings-address">
-              <h3>Address Settings</h3>
-              <ul>
-                <li>
-                  <input
-                    type="email"
-                    name="new-delivery-address"
-                    placeholder="Enter New Delivery Address"
-                  />
-                </li>
-              </ul>
-            </div>
-            <div class="settings-email">
-              <h3>Email Settings</h3>
-              <ul>
-                <li>
-                  <input
-                    type="email"
-                    name="new-email"
-                    placeholder="Enter New Email Address"
-                  />
-                </li>
-              </ul>
-            </div>
-            <div class="settings-confirm">
-              <form action="#" class="confirm-form">
-                <input
-                  type="password"
-                  placeholder="Enter Your Current Password"
-                />
-              </form>
-              <a href="#">Confirm Changes</a>
-            </div>
+                </form>
+                <a href="#">Confirm Changes</a>
+              </div>
+            </form>
+            
           </div>
         </div>
       </div>

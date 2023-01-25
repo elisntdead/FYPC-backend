@@ -6,7 +6,7 @@ class Product(models.Model):
   name = models.CharField(max_length=60)
   description = models.TextField()
   price = models.DecimalField(max_digits=7, decimal_places=2)
-  installTime = models.IntegerField()
+  installTime = models.IntegerField(null=True, blank=True)
   timesBought = models.IntegerField(default=0)
   tags = models.ManyToManyField(Tag, blank=True)
   created = models.DateTimeField(auto_now_add=True)

@@ -9,6 +9,9 @@ urlpatterns = [
     path("workers/<str:pk>", views.WorkerView, name="view-worker"),
     path("products/", views.Products, name="products"),
     path("products/<str:pk>", views.ProductView, name="view-product"),
+    path("products/create/", views.ProductAdd, name="add-product"),
+    path("products/edit/<str:pk>", views.ProductEdit, name="edit-product"),
+    path("products/delete/<str:pk>", views.ProductDelete, name="delete-product"),
     path("bundles/", views.Bundles, name="bundles"),
     path("bundles/<str:pk>", views.BundleView, name="view-bundle"),
 ]

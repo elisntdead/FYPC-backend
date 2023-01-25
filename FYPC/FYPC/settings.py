@@ -93,7 +93,7 @@ DATABASES = {
     #database config
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'fypc',
+        'NAME': 'fypc_db',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',

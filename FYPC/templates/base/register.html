@@ -6,21 +6,13 @@
       <form class="log-join-form" action="" method="post">
         {% csrf_token %}
         <ul>
-          <li>
-            <input
-              type="text"
-              name="login"
-              placeholder="Enter Your Phone Or Email"
-            />
-          </li>
-          <li>
-            <input
-              type="password"
-              name="phone-number"
-              placeholder="Enter Your Password"
-            />
-          </li>
+          <li>{{form.email}}</li>
+          <li>{{form.password1}}</li>
+          <li>{{form.password2}}</li>
         </ul>
+        
+        
+        
         <div class="log-join-buttons">
           <a href="{%url 'login'%}">Log In</a>
           <input type="submit" value="Join" method="post" />
