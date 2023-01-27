@@ -8,4 +8,4 @@ class Review(models.Model):
   text = models.TextField()
   created = models.DateTimeField(auto_now_add=True)
   deleted = models.DateTimeField(null=True, blank=True)
-  approved = models.DateTimeField()
+  approved = models.DateTimeField(null=True, blank=True)

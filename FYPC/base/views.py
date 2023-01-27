@@ -12,6 +12,20 @@ from django.core.paginator import Paginator
 from .forms import UserForm
 
 # Create your views here.
+
+def CartCheckCreate(user):
+  if Order.objects.filter(client=user, status=1).exists():
+    order = Order.objects.get(client=user, status=1)
+  else:
+    order = Order.objects.create(
+      client = user,
+      status = 1,
+      delivery = False,
+      paid = 0,
+      price = 0
+    )
+  return order
+
 def Home(request):
   popular = Product.objects.all().order_by('timesBought').filter(deleted__isnull=True)[:10]
   context = {'popular':popular}
@@ -35,15 +49,16 @@ def Catalog(request):
 @login_required(login_url="login")
 def Cart(request):
   user = request.user
-  order = Order.objects.get(client=user, status=1)
+  order = CartCheckCreate(user)
   products = order.order_products_set.all()
   context = {"order":order, "products":products}
   return render(request, "base/cart.html", context)
 
 @login_required(login_url="login")
 def AddToCart(request, pk):
+  user = request.user
   add_product = Product.objects.get(id=pk)
-  cart_order = Order.objects.get(client=request.user, status=1)
+  cart_order = CartCheckCreate(user)
   product = Order_products.objects.create(
   order = cart_order,
   product = add_product
@@ -53,9 +68,12 @@ def AddToCart(request, pk):
 @login_required(login_url="login")
 def RemoveFromCart(request, pk):
   cart_order = Order.objects.get(client = request.user, status=1)
-  added = Order_products.objects.get(order = cart_order, product=pk)
-  added.delete()
-  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+  try:
+    added = Order_products.objects.filter(order = cart_order, product=pk).first()
+    added.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+  except:
+    return redirect("home")
 
 def ProductView(request, pk):
   product = Product.objects.get(id=pk)
@@ -101,8 +119,14 @@ def AccountFavourites(request):
 @login_required(login_url="login")
 def AccountSettings(request):
   user = request.user
-  form = UserForm
-  return render(request, "base/myaccount-settings.html")
+  form = UserForm(instance=user)
+  if request.method == "POST":
+    form = UserForm(request.POST, instance=user)
+    if form.is_valid():
+      form.save()
+      login(request, user)
+  context = {"form":form}
+  return render(request, "base/myaccount-settings.html", context)
 
 def Login(request):
   if request.user.is_authenticated:

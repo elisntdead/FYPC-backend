@@ -14,4 +14,8 @@ urlpatterns = [
     path("products/delete/<str:pk>", views.ProductDelete, name="delete-product"),
     path("bundles/", views.Bundles, name="bundles"),
     path("bundles/<str:pk>", views.BundleView, name="view-bundle"),
+    path("reviews/", views.Reviews, name="reviews"),
+    path("reviews/<str:pk>", views.ReviewView, name="view-review"),
+    path("reviews/edit/<str:pk>", views.ReviewEdit, name="edit-review"),
+    path("reviews/delete/<str:pk>", views.ReviewDelete, name="delete-review"),
 ]
