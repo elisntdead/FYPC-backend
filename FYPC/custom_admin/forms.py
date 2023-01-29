@@ -1,6 +1,7 @@
 from django.forms import ModelForm, TextInput, NumberInput, Textarea
 from Product.models import Product
 from Review.models import Review
+from django.contrib.auth.models import Group
 
 #forms
 
@@ -23,4 +24,12 @@ class ReviewForm(ModelForm):
     exclude = ['created', 'deleted','approved', 'client','product']
     widgets = {
       'text':Textarea(attrs={'class':'form-control'})
+    }
+
+class RoleForm(ModelForm):
+  class Meta:
+    model = Group
+    fields = ['name']
+    widgets = {
+      'name':TextInput(attrs={'class':'form-control'}),
     }

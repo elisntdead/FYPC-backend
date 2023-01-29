@@ -1,5 +1,5 @@
 {% extends 'admin/main.html' %}
-{% block pageTitle %}Role: {{role.name}}{% endblock pageTitle %}
+{% block pageTitle %}{{role.name}} Edit Permissions{% endblock pageTitle %}
 {% block content %}
           <ul class="navbar-nav">
             <li class="nav-item">
@@ -66,40 +66,40 @@
         <nav aria-label="breadcrumb ">
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item">
-              <a href="/admin-roles.html">Roles</a>
+              <a href="/admin-workers.html">Roles</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">{{role.name}}</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Edit: {{role.name}}
+            </li>
           </ol>
         </nav>
         <div class="buttons">
-          <a href="{% url 'edit-role' role.id%}"
-            ><i class="fa-solid fa-pen-to-square fa-2xl"></i
+          <input type="submit" value="OK" form="role-edit">
+          <a href="#"
+            ><i
+              class="fa-solid fa-circle-check fa-2xl mt-2 me-2 pt-1 text-success"
+            ></i></a
+          >
+          {% if page == "add" %}
+          <a href="{% url 'roles' %}"
+            ><i class="fa-solid fa-trash fa-2xl mt-2 ms-2 pt-1 text-danger"></i
           ></a>
+          {% else %}
+          <a href="{% url 'delete-role' role.id %}"
+            ><i class="fa-solid fa-trash fa-2xl mt-2 ms-2 pt-1 text-danger"></i
+          ></a>
+          {% endif %}
         </div>
       </div>
     </section>
     <section class="container">
       <div class="shadow-lg my-4 p-3 rounded">
-        <div class="row row-cols-2 row-cols-md-2 row-cols-xl-4">
-          <div class="col">
-            <div class="input-group">
-              <span class="input-group-text" id="Addon-Name">Name</span>
-              <input
-                type="text"
-                class="form-control"
-                aria-label="Name"
-                aria-describedby="basic-addon1"
-                value="{{role.name}}"
-                disabled
-              />
-            </div>
+        <div class="d-flex justify-content-between">
+          <h4 class="h4">Role's Permissions</h4>
+          <div class="buttons">
+            <a href="#"> <i class="fa-solid fa-circle-plus fa-2xl"></i></a>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="container">
-      <div class="shadow-lg my-4 p-3 rounded">
-        <h4 class="h4">Role's Permissions</h4>
         <div class="table-responsive">
           <table class="table table-hover table-striped">
             <thead>
@@ -119,17 +119,17 @@
               </tr>
             </thead>
             <tbody>
-              {% for permission in role_permissions %}
+              {% for permission in add_permissions %}
               <tr>
                 <th scope="row">
                   <p class="text-dark">{{permission.id}}</p>
                 </th>
-
                 <td>
                   <p class="text-dark"
                     >{{permission.name}}</p
                   >
                 </td>
+                <td><a href="{% url 'add-permission' pk=role.id permission_id=permission.id%}"> <i class="fa-solid fa-circle-plus fa-2xl"></i></a></td>
               </tr>
               {% endfor %}
             </tbody>

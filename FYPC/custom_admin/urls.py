@@ -18,4 +18,12 @@ urlpatterns = [
     path("reviews/<str:pk>", views.ReviewView, name="view-review"),
     path("reviews/edit/<str:pk>", views.ReviewEdit, name="edit-review"),
     path("reviews/delete/<str:pk>", views.ReviewDelete, name="delete-review"),
+    path("roles/", views.Roles, name="roles"),
+    path("roles/create/", views.RoleAdd, name="add-role"),
+    path("roles/<str:pk>", views.RoleView, name="view-role"),
+    path("roles/edit/<str:pk>", views.RoleEdit, name="edit-role"),
+    path("roles/delete/<str:pk>", views.RoleDelete, name="delete-role"),
+    path("roles/edit/<str:pk>/add-permission", views.RoleAddPermission, name="add-permissions"),
+    path("roles/edit/<str:pk>/add-permission/<str:permission_id>", views.AddPermission, name="add-permission"),
+    path("roles/edit/<str:pk>/remove-permission/<str:permission_id>", views.RemovePermission, name="remove-permission"),
 ]

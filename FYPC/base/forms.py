@@ -14,4 +14,6 @@ class UserForm(UserCreationForm):
   def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields['password1'].widget = PasswordInput(attrs={'placeholder':'Enter Your Password'})
+        self.fields['password1'].required=False
         self.fields['password2'].widget = PasswordInput(attrs={'placeholder':'Confirm Password'})
+        self.fields['password2'].required=False

@@ -147,7 +147,6 @@ def Login(request):
       return redirect("home")
     else: 
       messages.error(request, "An error occured during authentication")
-
   return render(request, "base/login.html")
 
 def Logout(request):

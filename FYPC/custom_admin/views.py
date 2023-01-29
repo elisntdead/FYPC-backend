@@ -5,7 +5,9 @@ from Image.models import Image
 from bundles.models import Bundle
 from Review.models import Review
 from django.utils import timezone
-from .forms import ProductForm, ReviewForm
+from .forms import ProductForm, ReviewForm, RoleForm
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import Permission
 from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 @staff_member_required(login_url="login")
@@ -131,3 +133,69 @@ def ReviewDelete(request, pk):
   review.deleted = timezone.now()
   review.save()
   return redirect("reviews")
+
+@staff_member_required(login_url="login")
+def Roles(request):
+  roles = Group.objects.all()
+  context = {"roles":roles}
+  return render(request, "admin/admin-roles.html",context)
+
+@staff_member_required(login_url="login")
+def RoleView(request, pk):
+  role = Group.objects.get(id=pk)
+  role_permissions = role.permissions.all()
+  context = {"role":role, "role_permissions":role_permissions}
+  return render(request, "admin/admin-role.html", context)
+
+@staff_member_required(login_url="login")
+def RoleAdd(request):
+  form = RoleForm()
+  page = "add"
+  if request.method == "POST":
+    form = RoleForm(request.POST)
+    if form.is_valid():
+      role = form.save()
+      return redirect("roles")
+  context = {"form":form, "page":page}
+  return render(request, "admin/admin-role-edit.html", context)
+
+@staff_member_required(login_url="login")
+def RoleEdit(request, pk):
+  page = "edit"
+  role = Group.objects.get(id=pk)
+  role_permissions = role.permissions.all()
+  form = RoleForm(instance=role)
+  if request.method == "POST":
+    form = RoleForm(request.POST, instance=role)
+    if form.is_valid():
+      role = form.save()
+      return redirect("view-role", role.id)
+  context = {"page":page, "form":form, "role":role, "role_permissions":role_permissions}
+  return render(request, "admin/admin-role-edit.html", context)
+
+@staff_member_required(login_url="login")
+def RoleDelete(request, pk):
+  role = Group.objects.get(id=pk)
+  role.delete()
+  return redirect("roles")
+
+@staff_member_required(login_url="login")
+def RoleAddPermission(request, pk):
+  role = Group.objects.get(id=pk)
+  add_permissions = Permission.objects.exclude(group__name=role.name).order_by("id")
+  context = {"role":role, "add_permissions":add_permissions}
+  return render(request, "admin/admin-add-permission.html", context)
+
+@staff_member_required(login_url="login")
+def AddPermission(request, pk, permission_id):
+  role = Group.objects.get(id=pk)
+  permission = Permission.objects.get(id=permission_id)
+  role.permissions.add(permission)
+  return redirect("edit-role", role.id)
+
+@staff_member_required(login_url="login")
+def RemovePermission(request, pk, permission_id):
+  role = Group.objects.get(id=pk)
+  permission = Permission.objects.get(id=permission_id)
+  role.permissions.remove(permission)
+  return redirect("edit-role", role.id)
