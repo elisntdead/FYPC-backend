@@ -11,8 +11,10 @@ class Order(models.Model):
     (1, 'In Cart'),
     (2, 'Active'),
     (3, 'Finished'),
-    (4, 'Waiting for pay'),
-    (5, 'Waiting for pickup')
+    (4, 'Waiting for payment'),
+    (5, 'Waiting for pickup'),
+    (6, 'Cancelled'),
+    (7, 'Refund'),
   ]
 
   client = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
