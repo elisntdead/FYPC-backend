@@ -6,17 +6,20 @@
       <div class="page-title">
         <h1>Your Cart</h1>
       </div>
+      {% if messages %} {% for message in messages %}
+      <h1>{{message}}</h1>
+      {% endfor %}{% endif %}
       <div class="cart-summary">
         <p class="products-quantity">
           <b>You Are Buying</b>
           <i class="fa-solid fa-cart-shopping fa-xl"></i>
-          <strong>4</strong> <b>Products</b>
+          <strong>{{products.count}}</strong> <b>Products</b>
         </p>
         <p class="products-price">
-          With Total Price Of <strong>44990</strong
+          With Total Price Of <strong>{{price}}</strong
           ><i class="fa-solid fa-ruble-sign"></i>
         </p>
-        <a href="#">Confirm Order</a>
+        <a href="{% url 'confirm' order.id %}">Confirm Order</a>
       </div>
       <div class="cart-items">
         {% for product in products %}

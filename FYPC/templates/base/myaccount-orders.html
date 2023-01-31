@@ -1,5 +1,6 @@
 {% extends 'main.html' %} {% block pageTitle %}My Orders{% endblock pageTitle %}
-{% block content %}<section class="section">
+{% block content %}
+<section class="section">
   <div class="container">
     <div class="myaccount-body">
       <div class="account-info">
@@ -23,22 +24,23 @@
                   </p>
                 </div>
                 <div class="item-info-secondary">
-                  <p>Status: <strong>{{order.status}}</strong></p>
+                  <p>Status: <strong>{{order.get_status_display}}</strong></p>
                   <p>Client: <strong>{{order.client.username}}</strong></p>
                 </div>
                 <div class="item-info-third">
                   <p>
-                    Paid: <strong>{{order.paid}}</strong>/<strong>{{order.price}}</strong
+                    Paid: <strong>{{order.paid}}</strong>/<strong
+                      >{{order.price}}</strong
                     ><i class="fa-solid fa-ruble-sign"></i>
                   </p>
                 </div>
                 <div class="item-button">
-                  <a href="#">View Items In This Order</a>
+                  <a href="{% url 'order-products' order.id %}"
+                    >View Items In This Order</a
+                  >
                 </div>
               </div>
               {% endfor %}
-              
-              
             </div>
             <div class="orders-pagination">
               <ul class="pagination-list">
@@ -58,6 +60,5 @@
       </div>
     </div>
   </div>
-</section>{% endblock content %}
-    
-    
+</section>
+{% endblock content %}

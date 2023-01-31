@@ -1,0 +1,33 @@
+{% extends 'main.html' %} {% block pageTitle %}Order #{{order.id}}{% endblock pageTitle %} {% block content %}
+<section class="section">
+  <div class="container">
+    <div class="catalog-body">
+      <div class="page-title">
+        <h1>Products in Order #{{order.id}}</h1>
+      </div>
+      <div class="catalog-cards">
+        {% for item in products %}
+        <div class="catalog-card">
+          <a href="{% url 'product' item.product.id%}"
+            ><div class="item-img">
+              <img src="{{item.product.get_first_image.url}}" alt="" width="200px" height="200px"/>
+            </div>
+          </a>
+          <div class="item-info">
+            <a href="{% url 'product' item.product.id %}"
+              ><h2>{{item.product.name}}</h2></a
+            >
+            <p>
+              Price: <span>{{item.price}} </span><i class="fa-solid fa-ruble-sign"></i>
+            </p>
+            <div class="item-info-specs">
+              {{item.product.description}}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

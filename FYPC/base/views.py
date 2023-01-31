@@ -51,8 +51,28 @@ def Cart(request):
   user = request.user
   order = CartCheckCreate(user)
   products = order.order_products_set.all()
-  context = {"order":order, "products":products}
+  price = 0
+  for product in products:
+    price += product.product.price
+  context = {"order":order, "products":products, "price":price}
   return render(request, "base/cart.html", context)
+
+@login_required(login_url="login")
+def ConfirmOrder(request, pk):
+  order = Order.objects.get(id=pk)
+  if order.order_products_set.exists():
+    order.status = 2
+    order_products = order.order_products_set.all()
+    order.price = 0
+    for order_product in order_products:
+      order_product.price = (Product.objects.get(id=order_product.product.id)).price
+      order_product.save()
+      order.price += order_product.price
+      order.save()
+      return redirect("account-orders")
+  else:
+    messages.error(request, "You haven't added any products to your cart")
+    return redirect("cart")
 
 @login_required(login_url="login")
 def AddToCart(request, pk):
@@ -94,10 +114,8 @@ def MarkProduct(request, pk):
    )
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   
-
 @login_required(login_url="login")
 def UnmarkProduct(request, pk):
-  #user_favourites = request.user.favourite_set.all()
   marked = Favourites.objects.get(product=pk, user = request.user)
   marked.delete()
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -105,9 +123,18 @@ def UnmarkProduct(request, pk):
 @login_required(login_url="login")
 def AccountOrders(request):
   client = User.objects.get(id=request.user.id)
-  orders = client.order_set.all()
+  orders = client.order_set.exclude(Q(status=1) | Q(deleted__isnull=False))
   context = {"client":client, "orders":orders}
   return render(request, "base/myaccount-orders.html",context)
+
+@login_required(login_url="login")
+def OrderProducts(request, pk):
+  order = Order.objects.get(id=pk)
+  if (request.user != order.client) & order.status ==1:
+    return redirect("home")
+  products = order.order_products_set.all()
+  context = {"order":order, "products":products}
+  return render(request, "base/show-order-products.html" ,context)
 
 @login_required(login_url="login")
 def AccountFavourites(request):
