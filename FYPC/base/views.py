@@ -163,7 +163,7 @@ def Login(request):
     user_login = request.POST.get("login")
     password = request.POST.get("password")
     try:
-      user = User.objects.get(Q(email=user_login)|Q(phone=user_login))
+      user = User.objects.get(Q(email=user_login))
     except:
       messages.error(request, "User doesnt exist")
 
