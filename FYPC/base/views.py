@@ -122,9 +122,10 @@ def UnmarkProduct(request, pk):
 
 @login_required(login_url="login")
 def AccountOrders(request):
+  page = "orders"
   client = User.objects.get(id=request.user.id)
   orders = client.order_set.exclude(Q(status=1) | Q(deleted__isnull=False))
-  context = {"client":client, "orders":orders}
+  context = {"client":client, "orders":orders, "page":page}
   return render(request, "base/myaccount-orders.html",context)
 
 @login_required(login_url="login")
@@ -138,13 +139,15 @@ def OrderProducts(request, pk):
 
 @login_required(login_url="login")
 def AccountFavourites(request):
+  page = "favourites"
   user = request.user
   favourites = user.favourites_set.all()
-  context = {"favourites":favourites}
+  context = {"favourites":favourites, "page":page}
   return render(request, "base/myaccount-favourites.html", context)
 
 @login_required(login_url="login")
 def AccountSettings(request):
+  page = "settings"
   user = request.user
   form = UserForm(instance=user)
   if request.method == "POST":
@@ -152,7 +155,7 @@ def AccountSettings(request):
     if form.is_valid():
       form.save()
       login(request, user)
-  context = {"form":form}
+  context = {"form":form, "page":page}
   return render(request, "base/myaccount-settings.html", context)
 
 def Login(request):
