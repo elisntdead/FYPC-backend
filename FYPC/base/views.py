@@ -10,6 +10,8 @@ from .filters import ProductFilter
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from .forms import UserForm
+from django.core.exceptions import PermissionDenied
+from django.http import Http404
 
 # Create your views here.
 
@@ -195,3 +197,10 @@ def Join(request):
       messages.error(request, "There's an error during registration")
   context = {"form":form}
   return render(request, "base/register.html", context)
+
+def NotFound(request, exception=None):
+  return render(request, "404.html", status=404)
+
+
+def AccessDenied(request, exception=None):
+  return render(request, "403.html", status=403)

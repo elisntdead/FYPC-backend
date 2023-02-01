@@ -1,0 +1,16 @@
+{% extends 'main.html' %}{% block pageTitle %}Page not found!{% endblock pageTitle %}{% block content %}
+<section class="section">
+  <div class=" container" style="display: flex; justify-content: center; margin-top: 3em;">
+    <div>
+      <h1 style="font-size: 2em;"><i class="fa-solid fa-xmark fa-xl" style="margin-right: 10px;"></i>Page Not Found
+      </h1>
+      <p style="margin-top: 2em; margin-bottom: 1.4em; font-size: 1.2em;">We're sorry, but the page you were looking
+        for could not be found.
+        It may have been moved or deleted, or you may have typed the URL incorrectly.
+        If you need assistance, please contact the website administrator.
+        In the meantime, you can return to the home page.</p>
+      <a href="{% url 'home'%}" style="color: white;">Take Me Back!</a>
+    </div>
+  </div>
+</section>
+{% endblock content %}

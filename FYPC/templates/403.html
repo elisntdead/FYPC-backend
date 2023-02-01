@@ -1,0 +1,17 @@
+{% extends 'main.html' %}{% block pageTitle %}Page not found!{% endblock pageTitle %}{% block content %}
+<section class="section">
+  <div class=" container" style="display: flex; justify-content: center; margin-top: 3em;">
+  <div>
+    <h1 style="font-size: 2em;"><i class="fa-solid fa-lock fa-xl" style="margin-right: 10px;"></i>Access Denied</h1>
+    <p style="margin-top: 2em; margin-bottom: 1.4em; font-size: 1.2em;">You <span style="color:red">do not have
+        permission</span> to access
+      this page.
+      It may be due to restricted access or your account not having the required privileges.
+      If you believe this is a mistake, please contact the website administrator for assistance.
+      Thank you for your understanding.</p>
+    <a href="{% url 'home'%}" style="color: white;">Take Me Back!</a>
+  </div>
+  </div>
+
+</section>
+{% endblock content %}
