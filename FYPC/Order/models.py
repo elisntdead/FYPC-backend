@@ -31,6 +31,8 @@ class Order(models.Model):
   deleted = models.DateTimeField(null=True, blank=True)
 
 
+#@property
+
 class Order_products(models.Model):
   order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False)
   product = models.ForeignKey(Product, on_delete=models.CASCADE, null=False)

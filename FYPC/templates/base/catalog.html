@@ -1,4 +1,5 @@
-{% extends 'main.html' %}{% block pageTitle %}Catalog{% endblock pageTitle %}
+
+{% extends 'main.html' %}{% load spurl %}{% block pageTitle %}Catalog{% endblock pageTitle %}
 {%block content %}
 <section class="section">
   <div class="container">
@@ -40,19 +41,18 @@
       <div class="catalog-pagination">
         <ul class="pagination-list">
           {% if  page_obj.has_previous %}
-          <li><a href="{{request.get_full_path|truncatechars:7}}&page={{page_obj.previous_page_number}}">«</a></li>
+          <li><a href="{% spurl query=request.GET set_query='page={{page_obj.previous_page_number}}'%}">«</a></li>
           {% else %}
           <li><a href="#">«</a></li>
           {% endif %}
-          {% for page in page_obj.paginator.page_range %}
-          {% if 'name' in request.get_full_path %}
-          <li><a href="{{request.get_full_path}}&page={{page}}">{{page}}</a></li>
-          {% else %}
-          <li><a href="?page={{page}}">{{page}}</a></li>
-          {% endif %}
+          {% for page_link in page_obj.paginator.page_range %}
+          <li><a href="{% spurl query=request.GET set_query='page={{page_link}}'%}">{{page_link}}</a></li>
           {% endfor %}
           {% if  page_obj.has_next %}
-          <li><a href="{{request.get_full_path}}&page={{page_obj.next_page_number}}">»</a></li>{% endif %}
+          <li><a href="{% spurl query=request.GET set_query='page={{page_obj.next_page_number}}'%}">»</a></li>
+          {% else %}
+          <li><a href="#">»</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>

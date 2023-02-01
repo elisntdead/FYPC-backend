@@ -14,6 +14,7 @@ class Product(models.Model):
   def __str__(self):
     return self.name[0:40]
 
+
   def get_first_image(self):
     try:
       first_image = self.images.first().image

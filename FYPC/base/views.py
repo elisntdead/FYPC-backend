@@ -51,7 +51,7 @@ def Cart(request):
   user = request.user
   order = CartCheckCreate(user)
   products = order.order_products_set.all()
-  price = 0
+  price = 0 #перенести в модель
   for product in products:
     price += product.product.price
   context = {"order":order, "products":products, "price":price}
@@ -63,7 +63,7 @@ def ConfirmOrder(request, pk):
   if order.order_products_set.exists():
     order.status = 2
     order_products = order.order_products_set.all()
-    order.price = 0
+    order.price = 0     #перенести в модель
     for order_product in order_products:
       order_product.price = (Product.objects.get(id=order_product.product.id)).price
       order_product.save()
