@@ -47,7 +47,6 @@ def Catalog(request):
   context = {"product_filter":product_filter, "page_obj":page_obj}
   return render(request, "base/catalog.html", context)
 
-
 @login_required(login_url="login")
 def Cart(request):
   user = request.user
@@ -100,7 +99,8 @@ def RemoveFromCart(request, pk):
 def ProductView(request, pk):
   product = Product.objects.get(id=pk)
   product_images = product.images.all()
-  context = {"product":product, "product_images": product_images}
+  similar_products = Product.objects.filter(tags__in=product.tags.all()).exclude(pk=product.pk)[:6]
+  context = {"product":product, "product_images": product_images, "similar_products":similar_products}
   return render(request, "base/product.html", context)
 
 @login_required(login_url="login")

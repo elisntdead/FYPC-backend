@@ -1,6 +1,7 @@
 from django.db import models
 from User.models import User
 from Product.models import Product
+from Tag.models import Tag
 
 # Create your models here.
 
@@ -28,7 +29,9 @@ class Order(models.Model):
   finished = models.DateTimeField(null=True, blank=True)
   created = models.DateTimeField(auto_now_add=True)
   cancelled = models.DateTimeField(null=True, blank=True)
-  deleted = models.DateTimeField(null=True, blank=True)
+  deleted = models.DateTimeField(null=True, blank=True) 
+  tags = models.ManyToManyField(Tag, related_name="products")
+  
 
 
 #@property
