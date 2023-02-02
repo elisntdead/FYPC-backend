@@ -3,7 +3,7 @@ from Product.models import Product, Favourites
 from Image.models import Image
 from User.models import User
 from Order.models import Order, Order_products
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .filters import ProductFilter
@@ -99,7 +99,9 @@ def RemoveFromCart(request, pk):
 def ProductView(request, pk):
   product = Product.objects.get(id=pk)
   product_images = product.images.all()
-  similar_products = Product.objects.filter(tags__in=product.tags.all()).exclude(pk=product.pk)[:6]
+  similar_products = Product.objects.filter(tags__in=product.tags.all()).exclude(pk=product.pk).distinct()
+  similar_products = similar_products.annotate(num_matching_tags=Count('tags', filter=Q(tags__in=product.tags.all())))
+  similar_products = similar_products.order_by('-num_matching_tags')[:6]
   context = {"product":product, "product_images": product_images, "similar_products":similar_products}
   return render(request, "base/product.html", context)
 
