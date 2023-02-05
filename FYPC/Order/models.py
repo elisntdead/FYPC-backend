@@ -32,9 +32,25 @@ class Order(models.Model):
   deleted = models.DateTimeField(null=True, blank=True) 
   tags = models.ManyToManyField(Tag, related_name="products")
   
+  @property
+  def confirm_order(self):
+    self.status = 2
+    order_products = self.order_products_set.all()
+    self.price = 0     
+    for order_product in order_products:
+      order_product.price = (Product.objects.get(id=order_product.product.id)).price
+      order_product.save()
+      self.price += order_product.price
+      self.save()
+
+  @property
+  def cart_price(self):
+    price = 0 
+    for product in self.order_products_set.all():
+      price += product.product.price
+    return price
 
 
-#@property
 
 class Order_products(models.Model):
   order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False)

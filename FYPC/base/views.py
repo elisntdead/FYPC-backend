@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from Product.models import Product, Favourites
 from Image.models import Image
 from User.models import User
+from Promo.models import Promo
 from Order.models import Order, Order_products
 from django.db.models import Q, Count
 from django.contrib import messages
@@ -29,8 +30,9 @@ def CartCheckCreate(user):
   return order
 
 def Home(request):
-  popular = Product.objects.all().order_by('timesBought').filter(deleted__isnull=True)[:10]
-  context = {'popular':popular}
+  popular = Product.objects.all().order_by('-timesBought').filter(deleted__isnull=True)[:10]
+  promos = Promo.objects.all().filter(deleted__isnull=True)
+  context = {'popular':popular, "promos":promos}
   return render(request, "base/index.html", context)
 
 def Contacts(request):
@@ -52,25 +54,15 @@ def Cart(request):
   user = request.user
   order = CartCheckCreate(user)
   products = order.order_products_set.all()
-  price = 0 #перенести в модель
-  for product in products:
-    price += product.product.price
-  context = {"order":order, "products":products, "price":price}
+  context = {"order":order, "products":products, "price":order.cart_price}
   return render(request, "base/cart.html", context)
 
 @login_required(login_url="login")
 def ConfirmOrder(request, pk):
   order = Order.objects.get(id=pk)
   if order.order_products_set.exists():
-    order.status = 2
-    order_products = order.order_products_set.all()
-    order.price = 0     #перенести в модель
-    for order_product in order_products:
-      order_product.price = (Product.objects.get(id=order_product.product.id)).price
-      order_product.save()
-      order.price += order_product.price
-      order.save()
-      return redirect("account-orders")
+    order.confirm_order
+    return redirect("account-orders")
   else:
     messages.error(request, "You haven't added any products to your cart")
     return redirect("cart")
@@ -99,8 +91,7 @@ def RemoveFromCart(request, pk):
 def ProductView(request, pk):
   product = Product.objects.get(id=pk)
   product_images = product.images.all()
-  similar_products = Product.objects.filter(tags__in=product.tags.all()).exclude(pk=product.pk).distinct()
-  similar_products = similar_products.annotate(num_matching_tags=Count('tags', filter=Q(tags__in=product.tags.all())))
+  similar_products = Product.objects.filter(tags__in=product.tags.all()).exclude(pk=product.pk).distinct().annotate(num_matching_tags=Count('tags', filter=Q(tags__in=product.tags.all())))
   similar_products = similar_products.order_by('-num_matching_tags')[:6]
   context = {"product":product, "product_images": product_images, "similar_products":similar_products}
   return render(request, "base/product.html", context)

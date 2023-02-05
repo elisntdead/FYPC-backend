@@ -9,7 +9,7 @@
             <div class="swiper-wrapper">
               {% for product_image in product_images %}
               <div class="swiper-slide">
-                  <img src="{{product_image.image.url}}" alt="image"
+                  <img src="{{product_image.image.url}}" alt="{{product.name}}'s image" width="300px" height="300px"
                 /></a>
               </div>
               {% endfor %}
@@ -287,7 +287,7 @@
             <div class="similar-card swiper-slide">
               <a href="{% url 'view-product' similar.id%}"
                 ><div class="item-img">
-                  <img src="{{similar.get_first_image.url}}" alt="" />
+                  <img src="{{similar.get_first_image.url}}" alt="" width="200px" height="200px"/>
                 </div>
               </a>
               <div class="item-info">
@@ -299,7 +299,7 @@
                   ><i class="fa-solid fa-ruble-sign"></i>
                 </p>
                 <div class="item-info-specs">
-                  {{similar.description}}
+                  {{similar.short_description}}
                 </div>
               </div>
             </div>
