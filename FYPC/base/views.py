@@ -41,11 +41,9 @@ def Contacts(request):
 def Catalog(request):
   products = Product.objects.all().filter(deleted__isnull=True)
   product_filter = ProductFilter(request.GET, queryset=products)
-  
   paginated_products = Paginator(product_filter.qs, 4)
   page_number = request.GET.get("page")
   page_obj = paginated_products.get_page(page_number)
-  
   context = {"product_filter":product_filter, "page_obj":page_obj}
   return render(request, "base/catalog.html", context)
 
@@ -59,9 +57,12 @@ def Cart(request):
 
 @login_required(login_url="login")
 def ConfirmOrder(request, pk):
-  order = Order.objects.get(id=pk)
+  order = Order.objects.get(id=pk, status=1)
   if order.order_products_set.exists():
-    order.confirm_order
+    if request.user == order.client:
+      order.confirm_order
+    else: 
+      raise PermissionDenied()
     return redirect("account-orders")
   else:
     messages.error(request, "You haven't added any products to your cart")
@@ -126,8 +127,8 @@ def AccountOrders(request):
 @login_required(login_url="login")
 def OrderProducts(request, pk):
   order = Order.objects.get(id=pk)
-  if (request.user != order.client) & order.status ==1:
-    return redirect("home")
+  if (request.user != order.client) | (order.status == 1):
+    raise PermissionDenied()
   products = order.order_products_set.all()
   context = {"order":order, "products":products}
   return render(request, "base/show-order-products.html" ,context)
@@ -193,7 +194,6 @@ def Join(request):
 
 def NotFound(request, exception=None):
   return render(request, "404.html", status=404)
-
 
 def AccessDenied(request, exception=None):
   return render(request, "403.html", status=403)
