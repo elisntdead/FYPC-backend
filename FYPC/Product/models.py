@@ -2,9 +2,22 @@ from django.db import models
 from User.models import User
 from Tag.models import Tag
 # Create your models here.
-class Product(models.Model):
+
+
+
+class Product(models.Model): 
+  CATEGORIES = [
+    (1, 'PC'),
+    (2, 'Laptop'),
+    (3, 'Maintenance'),
+    (4, 'Accessory'),
+    (5, 'Software'),
+    (6, 'Miscellaneous')
+  ]
+
   name = models.CharField(max_length=60)
   description = models.TextField()
+  category = models.IntegerField(choices=CATEGORIES, default=1)
   price = models.DecimalField(max_digits=7, decimal_places=2)
   installTime = models.IntegerField(null=True, blank=True)
   timesBought = models.IntegerField(default=0)

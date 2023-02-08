@@ -8,9 +8,19 @@
       <div class="catalog-filter">
         <a href="#"><i class="fa-solid fa-filter fa-2xl"></i></a>
         <div class="filter-fields">
-          <form action="" method="get">
-            {{product_filter.form}}
-            <input type="submit" value="Apply Filter" id="" />
+          <form action="" method="get" class="field-group">
+            <ul>
+              <li>
+                {{product_filter.form.name}}</li>
+              <li>
+                {{product_filter.form.category}}</li>
+              <li>
+                {{product_filter.form.price__gt}}</li>
+              <li>
+                {{product_filter.form.price__lt}}</li>
+              <li>
+                <input type="submit" value="Apply" id="" /></li>
+            </ul>
           </form>
         </div>
       </div>

@@ -30,9 +30,15 @@ def CartCheckCreate(user):
   return order
 
 def Home(request):
-  popular = Product.objects.all().order_by('-timesBought').filter(deleted__isnull=True)[:10]
+  products = Product.objects.all().filter(deleted__isnull=True)
+  popular = products.order_by('-timesBought')[:10]
   promos = Promo.objects.all().filter(deleted__isnull=True)
-  context = {'popular':popular, "promos":promos}
+  pcs = products.order_by('?').filter(category=1)[:6]
+  laptops = products.order_by('?').filter(category=2)
+  maintenance = products.order_by('?').filter(category=3)
+  accessories = products.order_by('?').filter(category=4)
+  software = products.order_by('?').filter(category=5)
+  context = {'popular':popular, "promos":promos, "pcs":pcs, "laptops":laptops, "maintenance":maintenance, "accessories":accessories, "software":software}
   return render(request, "base/index.html", context)
 
 def Contacts(request):
