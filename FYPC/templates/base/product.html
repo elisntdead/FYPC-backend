@@ -285,7 +285,7 @@
           <div class="similar-cards swiper-wrapper">
             {% for similar in similar_products %}
             <div class="similar-card swiper-slide">
-              <a href="{% url 'view-product' similar.id%}"
+              <a href="{% url 'product' similar.id%}"
                 ><div class="item-img">
                   <img src="{{similar.get_first_image.url}}" alt="" width="200px" height="200px"/>
                 </div>

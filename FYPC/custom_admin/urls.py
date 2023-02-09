@@ -26,4 +26,5 @@ urlpatterns = [
     path("roles/edit/<str:pk>/add-permission", views.RoleAddPermission, name="add-permissions"),
     path("roles/edit/<str:pk>/add-permission/<str:permission_id>", views.AddPermission, name="add-permission"),
     path("roles/edit/<str:pk>/remove-permission/<str:permission_id>", views.RemovePermission, name="remove-permission"),
+    path("tags/", views.Tags, name="tags"),
 ]

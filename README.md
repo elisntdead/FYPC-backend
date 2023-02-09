@@ -6,7 +6,7 @@ FYPC is a web application that serves as PC, Laptops and Accessories for them sh
 
 ## Overview
 
-## Progress
+## Progress & Issues 
 
 ## Running FYPC on your local machine
 

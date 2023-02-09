@@ -1,68 +1,6 @@
 {% extends 'admin/main.html' %}
 {% block pageTitle %}Clients{% endblock pageTitle %}
-{% block content %}<ul class="navbar-nav">
-  <li class="nav-item">
-    <a
-      class="nav-link active"
-      aria-current="page"
-      href="{% url 'clients' %}"
-      >Clients</a
-    >
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'workers' %}">Workers</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin-orders.html">Orders</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin-reviews.html">Reviews</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin-products.html">Products</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin-bundles.html">Bundles</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin-roles.html">Roles</a>
-  </li>
-  <li class="nav-item dropdown">
-    <a
-      class="nav-link dropdown-toggle"
-      href="#"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      Others
-    </a>
-    <ul class="dropdown-menu dropdown-menu-dark">
-      <li>
-        <a class="dropdown-item" href="admin-worker-cabinet.html"
-          >My Work</a
-        >
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin-home-settings.html"
-          >Home Page Settings</a
-        >
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin-tags.html">Tags</a>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/"
-      ><i class="fa-solid fa-right-from-bracket fa-lg me-1"></i
-      ><span>Dmitry</span>
-    </a>
-  </li>
-</ul>
-</div>
-</div>
-</nav>
+{% block content %}
 <section class="container">
 <div class="shadow-lg my-4 p-3 rounded">
 <div class="row row-cols-2 row-cols-md-2 row-cols-xl-4">
@@ -148,19 +86,13 @@ Create New Client
       <th scope="col">
         <span class="sort-link"
           ><a href="#" class="text-dark"
-            >Name<i class="fa-solid fa-arrow-up-short-wide"></i></a
+            >Email<i class="fa-solid fa-arrow-up-short-wide"></i></a
         ></span>
       </th>
       <th scope="col">
         <span class="sort-link"
           ><a href="#" class="text-dark"
             >Address<i class="fa-solid fa-arrow-up-short-wide"></i></a
-        ></span>
-      </th>
-      <th scope="col">
-        <span class="sort-link"
-          ><a href="#" class="text-dark"
-            >Email<i class="fa-solid fa-arrow-up-short-wide"></i></a
         ></span>
       </th>
       <th scope="col">
@@ -179,11 +111,8 @@ Create New Client
       <th scope="row">
         <a href="{% url 'view-client' client.id %}" class="text-dark">{{client.id}}</a>
       </th>
-      <td>
-        <a href="{% url 'view-client' client.id %}" class="text-dark">{{client.username}}</a>
-      </td>
+      <td><a href="{% url 'view-client' client.id %}" class="text-dark">{{client.email}}</a></td>
       <td>{{client.address}}</td>
-      <td>{{client.email}}</td>
       <td>{{client.phone}}</td>
     </tr>
     {% endfor %}
