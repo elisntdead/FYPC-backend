@@ -6,11 +6,12 @@ from Promo.models import Promo
 from Order.models import Order, Order_products
 from django.db.models import Q, Count
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from .filters import ProductFilter
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
-from .forms import UserForm
+from .forms import UserForm, UserUpdateForm
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
 
@@ -151,12 +152,20 @@ def AccountFavourites(request):
 def AccountSettings(request):
   page = "settings"
   user = request.user
-  form = UserForm(instance=user)
+  form = UserUpdateForm(instance=user)
   if request.method == "POST":
-    form = UserForm(request.POST, instance=user)
+    form = UserUpdateForm(request.POST, instance=user)
     if form.is_valid():
-      form.save()
-      login(request, user)
+      user = form.save(commit=False)
+      password1 = request.POST.get('password1')
+      password2 = request.POST.get('password2')
+      if password1 == password2:
+        password = password1
+        if password:
+          form.save()
+          user.set_password(password)
+          user.save()
+          update_session_auth_hash(request, user)
   context = {"form":form, "page":page}
   return render(request, "base/myaccount-settings.html", context)
 
