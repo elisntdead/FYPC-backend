@@ -59,12 +59,19 @@ Here are some screenshots:
 
 ## Progress & Issues 
 
-Some things still need to be finished:
-1.  asd
-2.  asd
-3.  sad
-4.  sad
-5.  asd
+### Things that i will add in future!
+1.  Bundles
+2.  Pagination and filters wherever they are placed (atm they're only at catalog page)
+3.  Working "Callback" form on home page, which is not funcltional
+4.  Add worker cabinet
+5.  Add all admin pages that are currently missing
+6.  env file to config database connection to yours
+7.  and of course fixes
+
+### Issues that won't be fixed
+1.  Bad mobile adaptivity (since it was my first site ever ive made some big mistakes that will be annoying to fix)
+2.  Mistakes in styling (like images on home page, catalog card position in the middle, when theres odd number of them
+
 
 ## FYPC deployment
 
