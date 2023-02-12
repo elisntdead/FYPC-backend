@@ -15,6 +15,18 @@ FYPC (full name is "Fix Your PC - For All Your PC Needs!") is a web application 
 
 FYPC - is an online electronics store focused on PC and related products. On the site, you can create orders, add items to your cart, and save items to your favorites. The site also features a custom admin panel built with Bootstrap, which is easier to use than the standard Django admin panel.
 
+To build this site I used: 
+- HTML
+- CSS (SCSS)
+- fontawesome icons
+- JQuery
+- SwiperJS
+- Django 4.1.5
+  - django-spurl
+  - django-filter
+  - djnago-phonenumber-field
+  - mysqlclient
+
 Here are some screenshots:
 
 ### Home page, user isn't logged in
