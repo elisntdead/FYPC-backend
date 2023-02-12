@@ -3,6 +3,7 @@ from User.models import User
 from Product.models import Product
 from Image.models import Image
 from bundles.models import Bundle
+from Tag.models import Tag
 from Review.models import Review
 from django.utils import timezone
 from .forms import ProductForm, ReviewForm, RoleForm
@@ -16,20 +17,20 @@ def Admin(request):
 
 @staff_member_required(login_url="login")
 def Clients(request):
-  clients = User.objects.all().order_by("id")
+  clients = User.objects.filter(is_active=True, is_staff=False).order_by("id")
   context = {"clients":clients}
   return render(request, "admin/admin-clients.html", context)
 
 @staff_member_required(login_url="login")
 def ClientView(request, pk):
   client = User.objects.get(id=pk)
-  orders = client.order_set.all()
+  orders = client.order_set.exclude(status = 1)
   context = {"client":client, "orders":orders}
   return render(request, "admin/admin-client.html", context)
 
 @staff_member_required(login_url="login")
 def Workers(request):
-  workers = User.objects.all().order_by("id")
+  workers = User.objects.filter(is_active=True, is_staff=True).order_by('id')
   context = {"workers":workers}
   return render(request, "admin/admin-workers.html",context)
 
@@ -50,7 +51,8 @@ def Products(request):
 def ProductView(request, pk):
   product = Product.objects.get(id=pk)
   images = product.images.all()
-  context = {"product":product, "images":images}
+  tags = product.tags.all()
+  context = {"product":product, "images":images, "tags":tags}
   return render(request, "admin/admin-product.html", context)
 
 @staff_member_required(login_url="login")
@@ -69,13 +71,14 @@ def ProductAdd(request):
 def ProductEdit(request, pk):
   page = "edit"
   product = Product.objects.get(id=pk)
+  tags = product.tags.all()
   form = ProductForm(instance=product)
   if request.method == "POST":
     form = ProductForm(request.POST, instance=product)
     if form.is_valid():
       product = form.save()
       return redirect("view-product", product.id)
-  context = {"page":page, "form":form, "product":product}
+  context = {"page":page, "form":form, "product":product, "tags":tags}
   return render(request, "admin/admin-product-edit.html", context)
 
 @staff_member_required(login_url="login")
@@ -199,3 +202,9 @@ def RemovePermission(request, pk, permission_id):
   permission = Permission.objects.get(id=permission_id)
   role.permissions.remove(permission)
   return redirect("edit-role", role.id)
+
+@staff_member_required(login_url="login")
+def Tags(request):
+  tags = Tag.objects.all().order_by("id")
+  context = {"tags":tags}
+  return render(request, "admin/admin-tags.html" ,context)

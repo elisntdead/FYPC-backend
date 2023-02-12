@@ -1,5 +1,5 @@
 {% extends 'main.html' %}{% block pageTitle %}Account Settings{% endblock pageTitle %}
-{% block content %}    <section class="section">
+{% block content %} <section class="section">
   <div class="container">
     <div class="myaccount-body">
       <div class="account-info">
@@ -12,10 +12,10 @@
                 <h3>Password Settings</h3>
                 <ul>
                   <li>
-                    {{form.password1}}
+                    <input type="password" name="password1" id="password1">
                   </li>
                   <li>
-                    {{form.password2}}
+                    <input type="password" name="password2" id="password2">
                   </li>
                 </ul>
               </div>
@@ -44,17 +44,9 @@
                 </ul>
               </div>
               <div class="settings-confirm">
-                <form action="#" class="confirm-form">
-                  <input
-                    type="password"
-                    name="password_confirm"
-                    placeholder="Enter Your Current Password"
-                  />
-                </form>
                 <input type="submit" style="margin-left: 20px" value="Confirm Changes">
               </div>
             </form>
-            
           </div>
         </div>
       </div>

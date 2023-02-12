@@ -26,7 +26,7 @@
         <div class="cart-item">
           <a href="{% url 'product' product.product.id%}"
             ><div class="item-img">
-              <img src="{{product.product.get_first_image.url}}" alt="" />
+              <img src="{{product.product.get_first_image.url}}" alt="" height="200px" width="200px"/>
             </div>
           </a>
           <div class="item-info">
@@ -35,7 +35,8 @@
             >
 
             <p>
-              Price: <span>{{product.product.price}} </span><i class="fa-solid fa-ruble-sign"></i>
+              Price: <span>{{product.product.price}} </span
+              ><i class="fa-solid fa-ruble-sign"></i>
             </p>
             <div class="item-info-remove">
               <a href="{% url 'remove-cart' product.product.id%}"
@@ -43,7 +44,7 @@
               ></a>
             </div>
             <div class="item-info-specs">
-              {{product.product.description}}
+              {{product.product.short_description}}
             </div>
           </div>
         </div>

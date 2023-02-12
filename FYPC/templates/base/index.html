@@ -10,17 +10,13 @@
       </div>
       <div class="swiper slider-small">
         <div class="swiper-wrapper">
+          {% for promo in promos %}
           <div class="swiper-slide">
             <a href="/product.html"
-              ><img src="images/accessory_card.jpg" alt=""
+              ><img src="{{promo.image.url}}" alt="" height="300px" width="300px"
             /></a>
           </div>
-          <div class="swiper-slide">
-            <img src="images/desktop_card.jpg" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="images/laptop_card.jpg" alt="" />
-          </div>
+          {% endfor %}
         </div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
@@ -53,11 +49,79 @@
                   Price: <span>{{product.price}}</span
                   ><i class="fa-solid fa-ruble-sign"></i>
                 </p>
-                <div class="item-info-specs">{{product.description}}</div>
+                <div class="item-info-specs">{{product.short_description}}</div>
               </div>
             </div>
             {% endfor %} {% for img in popular.images.all %}
             <img src="{{img.image.url}}" alt="" />{% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="home-subtitle">
+        <h2>Laptops</h2>
+      </div>
+      <div class="home-maintanance">
+        <div class="swiper swiper-grid">
+          <div class="swiper-wrapper">
+            {% for product in laptops %}
+            <div class="home-card swiper-slide">
+              <a href="{% url 'product' product.id %}"
+                ><div class="item-img">
+                  <img
+                    src="{{product.get_first_image.url}}"
+                    alt="{{product.name}}'s image"
+                    width="200px"
+                    height="200px"
+                  />
+                </div>
+              </a>
+              <div class="item-info">
+                <a href="{% url 'product' product.id %}"
+                  ><h2>{{product.name}}</h2></a
+                >
+                <p>
+                  Price: <span>{{product.price}}</span
+                  ><i class="fa-solid fa-ruble-sign"></i>
+                </p>
+                <div class="item-info-specs">{{product.short_description}}</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="home-subtitle">
+        <h2>Accessories</h2>
+      </div>
+      <div class="home-maintanance">
+        <div class="swiper swiper-grid">
+          <div class="swiper-wrapper">
+            {% for product in accessories %}
+            <div class="home-card swiper-slide">
+              <a href="{% url 'product' product.id %}"
+                ><div class="item-img">
+                  <img
+                    src="{{product.get_first_image.url}}"
+                    alt="{{product.name}}'s image"
+                    width="200px"
+                    height="200px"
+                  />
+                </div>
+              </a>
+              <div class="item-info">
+                <a href="{% url 'product' product.id %}"
+                  ><h2>{{product.name}}</h2></a
+                >
+                <p>
+                  Price: <span>{{product.price}}</span
+                  ><i class="fa-solid fa-ruble-sign"></i>
+                </p>
+                <div class="item-info-specs">{{product.short_description}}</div>
+              </div>
+            </div>
+            {% endfor %}
           </div>
           <div class="swiper-pagination"></div>
         </div>
@@ -68,32 +132,30 @@
       <div class="home-maintanance">
         <div class="swiper swiper-grid">
           <div class="swiper-wrapper">
+            {% for product in maintenance %}
             <div class="home-card swiper-slide">
-              <a href="/product.html"
+              <a href="{% url 'product' product.id %}"
                 ><div class="item-img">
-                  <img src="images/laptop_card.jpg" alt="" />
+                  <img
+                    src="{{product.get_first_image.url}}"
+                    alt="{{product.name}}'s image"
+                    width="200px"
+                    height="200px"
+                  />
                 </div>
               </a>
               <div class="item-info">
-                <a href="/product.html"
-                  ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
+                <a href="{% url 'product' product.id %}"
+                  ><h2>{{product.name}}</h2></a
                 >
-
                 <p>
-                  Price: <span>44.990 </span
+                  Price: <span>{{product.price}}</span
                   ><i class="fa-solid fa-ruble-sign"></i>
                 </p>
-                <div class="item-info-specs">
-                  <ul>
-                    <h3>Product Specifications:</h3>
-                    <li><span>SSD</span>: 512GB</li>
-                    <li><span>CPU</span>: Amude R2222</li>
-                    <li><span>Warranty</span>: 1 year</li>
-                    <li><span>OS</span>: Doors 11</li>
-                  </ul>
-                </div>
+                <div class="item-info-specs">{{product.short_description}}</div>
               </div>
             </div>
+            {% endfor %}
           </div>
           <div class="swiper-pagination"></div>
         </div>

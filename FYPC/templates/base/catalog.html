@@ -1,26 +1,40 @@
-{% extends 'main.html' %}{% block pageTitle %}Catalog{% endblock pageTitle %}
-{%block content %}
+{% extends 'main.html' %}{% load spurl %}{% block pageTitle %}Catalog{% endblock pageTitle %} {%block content %}
 <section class="section">
   <div class="container">
     <div class="catalog-body">
       <div class="page-title">
-        <h1>Catalog: Desktops</h1>
+        <h1>Catalog</h1>
       </div>
       <div class="catalog-filter">
         <a href="#"><i class="fa-solid fa-filter fa-2xl"></i></a>
         <div class="filter-fields">
-          <form action="" method="get">
-            {{product_filter.form}}
-            <input type="submit" value="Apply Filter" id="">
+          <form action="" method="get" class="field-group">
+            <ul>
+              <li>
+                {{product_filter.form.name}}</li>
+              <li>
+                {{product_filter.form.category}}</li>
+              <li>
+                {{product_filter.form.price__gt}}</li>
+              <li>
+                {{product_filter.form.price__lt}}</li>
+              <li>
+                <input type="submit" value="Apply" id="" /></li>
+            </ul>
           </form>
         </div>
       </div>
       <div class="catalog-cards">
-        {% for product in  page_obj %}
+        {% for product in page_obj %}
         <div class="catalog-card">
           <a href="{% url 'product' product.id%}"
             ><div class="item-img">
-              <img src="{{product.get_first_image.url}}" alt="" width="200px" height="200px"/>
+              <img
+                src="{{product.get_first_image.url}}"
+                alt=""
+                width="200px"
+                height="200px"
+              />
             </div>
           </a>
           <div class="item-info">
@@ -28,31 +42,42 @@
               ><h2>{{product.name}}</h2></a
             >
             <p>
-              Price: <span>{{product.price}} </span><i class="fa-solid fa-ruble-sign"></i>
+              Price: <span>{{product.price}} </span
+              ><i class="fa-solid fa-ruble-sign"></i>
             </p>
-            <div class="item-info-specs">
-              {{product.description}}
-            </div>
+            <div class="item-info-specs">{{product.short_description}}</div>
           </div>
         </div>
         {% endfor %}
       </div>
       <div class="catalog-pagination">
         <ul class="pagination-list">
-          {% if  page_obj.has_previous %}
-          <li><a href="{{request.get_full_path|truncatechars:7}}&page={{page_obj.previous_page_number}}">«</a></li>
+          {% if page_obj.has_previous %}
+          <li>
+            <a
+              href="{% spurl query=request.GET set_query='page={{page_obj.previous_page_number}}'%}"
+              >«</a
+            >
+          </li>
           {% else %}
           <li><a href="#">«</a></li>
-          {% endif %}
-          {% for page in page_obj.paginator.page_range %}
-          {% if 'name' in request.get_full_path %}
-          <li><a href="{{request.get_full_path}}&page={{page}}">{{page}}</a></li>
+          {% endif %} {% for page_link in page_obj.paginator.page_range %}
+          <li>
+            <a
+              href="{% spurl query=request.GET set_query='page={{page_link}}'%}"
+              >{{page_link}}</a
+            >
+          </li>
+          {% endfor %} {% if page_obj.has_next %}
+          <li>
+            <a
+              href="{% spurl query=request.GET set_query='page={{page_obj.next_page_number}}'%}"
+              >»</a
+            >
+          </li>
           {% else %}
-          <li><a href="?page={{page}}">{{page}}</a></li>
+          <li><a href="#">»</a></li>
           {% endif %}
-          {% endfor %}
-          {% if  page_obj.has_next %}
-          <li><a href="{{request.get_full_path}}&page={{page_obj.next_page_number}}">»</a></li>{% endif %}
         </ul>
       </div>
     </div>

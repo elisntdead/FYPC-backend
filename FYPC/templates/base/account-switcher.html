@@ -1,19 +1,19 @@
 <div class="account-tabs-switcher">
   <h1>My Account</h1>
   <div class="tabs-switcher-item">
-    <input id="ma-option-1" type="radio" name="ma-switch" value="1" checked />
+    <input id="ma-option-1" type="radio" name="ma-switch" value="1" {% if page == "orders" %}checked{% endif %}  />
     <label for="ma-option-1"
       ><a href="{% url 'account-orders' %}">My Orders</a></label
     >
   </div>
   <div class="tabs-switcher-item">
-    <input id="ma-option-2" type="radio" name="ma-switch" value="2" />
+    <input id="ma-option-2" type="radio" name="ma-switch" value="2" {% if page == "settings" %}checked{% endif %}/>
     <label for="ma-option-2"
       ><a href="{% url 'account-settings' %}">Account Settings</a></label
     >
   </div>
   <div class="tabs-switcher-item">
-    <input id="ma-option-3" type="radio" name="ma-switch" value="3" />
+    <input id="ma-option-3" type="radio" name="ma-switch" value="3" {% if page == "favourites" %}checked{% endif %} />
     <label for="ma-option-3"
       ><a href="{% url 'account-favourites' %}">My Favourites</a></label
     >

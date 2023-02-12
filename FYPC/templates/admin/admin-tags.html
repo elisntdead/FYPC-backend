@@ -1,114 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <script
-      src="https://kit.fontawesome.com/711ce7038c.js  "
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="fonts/Gilroy Light/style.css"
-      type="text/css"
-    />
-    <link rel="stylesheet" href="fonts/Gilroy/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/admin-boostrap.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FYPC | Admin - Tags</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
-      <div class="container">
-        <a class="navbar-brand text-info me-5" href="#">
-          <img
-            src="/images/fypc_logo.png"
-            alt="Logo"
-            width="60"
-            height="60"
-            class="d-inline-block rounded-5 me-2"
-          />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse d-lg-flex justify-content-lg-end"
-          id="navbarNav"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/admin-clients.html"
-                >Clients</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin-workers.html">Workers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin-orders.html">Orders</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin-reviews.html">Reviews</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin-products.html">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin-bundles.html">Bundles</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin-roles.html">Roles</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle active"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Others
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                <li>
-                  <a class="dropdown-item" href="admin-worker-cabinet.html"
-                    >My Work</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/admin-home-settings.html"
-                    >Home Page Settings</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item active" href="/admin-tags.html"
-                    >Tags</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/"
-                ><i class="fa-solid fa-right-from-bracket fa-lg me-1"></i
-                ><span>Dmitry</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+{% extends 'admin/main.html' %}{% block pageTitle %}Tags{% endblock pageTitle %} {% block content %}
     <section class="container">
       <div class="shadow-lg my-4 p-3 rounded">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-          <div class="col-12 col-lg-4 mt-4">
+          <div class="col-12 col-md-12 col-lg-8 mt-4">
             <div class="input-group mb-3">
               <span class="input-group-text" id="Addon-Name">Name</span>
               <input
@@ -117,28 +11,6 @@
                 aria-label="Name"
                 aria-describedby="basic-addon1"
               />
-            </div>
-          </div>
-          <div class="col-12 col-lg-4">
-            <div class="input-group mb-3">
-              <label for="date-from">Date Started</label>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Addon-Name">From</span>
-                <input
-                  type="date"
-                  id="date-from"
-                  class="form-control"
-                  aria-label="Date Stated From"
-                  aria-describedby="basic-addon1"
-                /><span class="input-group-text" id="Addon-Name">To</span
-                ><input
-                  type="date"
-                  id="date-to"
-                  class="form-control"
-                  aria-label="Date Started To"
-                  aria-describedby="basic-addon1"
-                />
-              </div>
             </div>
           </div>
           <div class="col-12 col-lg-2 mt-0 mt-lg-4">
@@ -161,7 +33,7 @@
     <section class="container">
       <div class="shadow-lg my-4 p-3 rounded">
         <button type="button" class="btn btn-primary col-12 fw-bold">
-          Create New Client
+          Create New Tag
         </button>
         <div class="table-responsive">
           <table class="table table-hover table-striped">
@@ -179,107 +51,19 @@
                       >Name<i class="fa-solid fa-arrow-up-short-wide"></i></a
                   ></span>
                 </th>
-                <th scope="col">
-                  <span class="sort-link"
-                    ><a href="#" class="text-dark"
-                      >Date Added<i
-                        class="fa-solid fa-arrow-up-short-wide"
-                      ></i></a
-                  ></span>
-                </th>
               </tr>
             </thead>
             <tbody>
+              {% for tag in tags %}
               <tr>
                 <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
+                  <a href="/admin-tag.html" class="text-dark">{{tag.id}}</a>
                 </th>
                 <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
+                  <a href="/admin-tag.html" class="text-dark">{{tag.name}}</a>
                 </td>
-                <td>21.02.2022</td>
               </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <a href="/admin-tag.html" class="text-dark">1</a>
-                </th>
-                <td>
-                  <a href="/admin-tag.html" class="text-dark">Office</a>
-                </td>
-                <td>21.02.2022</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
@@ -305,11 +89,4 @@
         </nav>
       </div>
     </section>
-    <!---->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+{% endblock content %}

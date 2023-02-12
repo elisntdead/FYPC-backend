@@ -1,6 +1,7 @@
 from django.db import models
 from User.models import User
 from Product.models import Product
+from Tag.models import Tag
 
 # Create your models here.
 
@@ -11,8 +12,10 @@ class Order(models.Model):
     (1, 'In Cart'),
     (2, 'Active'),
     (3, 'Finished'),
-    (4, 'Waiting for pay'),
-    (5, 'Waiting for pickup')
+    (4, 'Waiting for payment'),
+    (5, 'Waiting for pickup'),
+    (6, 'Cancelled'),
+    (7, 'Refund'),
   ]
 
   client = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
@@ -26,7 +29,27 @@ class Order(models.Model):
   finished = models.DateTimeField(null=True, blank=True)
   created = models.DateTimeField(auto_now_add=True)
   cancelled = models.DateTimeField(null=True, blank=True)
-  deleted = models.DateTimeField(null=True, blank=True)
+  deleted = models.DateTimeField(null=True, blank=True) 
+  tags = models.ManyToManyField(Tag, related_name="products")
+  
+  @property
+  def confirm_order(self):
+    self.status = 2
+    order_products = self.order_products_set.all()
+    self.price = 0     
+    for order_product in order_products:
+      order_product.price = (Product.objects.get(id=order_product.product.id)).price
+      order_product.save()
+      self.price += order_product.price
+      self.save()
+
+  @property
+  def cart_price(self):
+    price = 0 
+    for product in self.order_products_set.all():
+      price += product.product.price
+    return price
+
 
 
 class Order_products(models.Model):

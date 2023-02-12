@@ -2,3 +2,4 @@
 env
 FYPC/db.sqlite3
 FYPC/*/migrations
+FYPC/media/*

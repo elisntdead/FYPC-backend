@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "bundles",
     "custom_admin",
     "phonenumber_field",
+    "spurl",
 ]
 
 AUTH_USER_MODEL = "User.User"

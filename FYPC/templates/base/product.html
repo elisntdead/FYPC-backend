@@ -9,7 +9,7 @@
             <div class="swiper-wrapper">
               {% for product_image in product_images %}
               <div class="swiper-slide">
-                  <img src="{{product_image.image.url}}" alt="image"
+                  <img src="{{product_image.image.url}}" alt="{{product.name}}'s image" width="300px" height="300px"
                 /></a>
               </div>
               {% endfor %}
@@ -283,57 +283,27 @@
         </div>
         <div class="swiper swiper-row">
           <div class="similar-cards swiper-wrapper">
-            
+            {% for similar in similar_products %}
             <div class="similar-card swiper-slide">
-              <a href="/product.html"
+              <a href="{% url 'product' similar.id%}"
                 ><div class="item-img">
-                  <img src="images/laptop_card.jpg" alt="" />
+                  <img src="{{similar.get_first_image.url}}" alt="" width="200px" height="200px"/>
                 </div>
               </a>
               <div class="item-info">
-                <a href="/product.html"
-                  ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
+                <a href="{% url 'product' similar.id%}"
+                  ><h2>{{similar.name}}</h2></a
                 >
                 <p>
-                  Price: <span>44.990 </span
+                  Price: <span>{{similar.price}} </span
                   ><i class="fa-solid fa-ruble-sign"></i>
                 </p>
                 <div class="item-info-specs">
-                  <ul>
-                    <h3>Product Specifications:</h3>
-                    <li><span>SSD</span>: 512GB</li>
-                    <li><span>CPU</span>: Amude R2222</li>
-                    <li><span>Warranty</span>: 1 year</li>
-                    <li><span>OS</span>: Doors 11</li>
-                  </ul>
+                  {{similar.short_description}}
                 </div>
               </div>
             </div>
-            <div class="similar-card swiper-slide">
-              <a href="/product.html"
-                ><div class="item-img">
-                  <img src="images/laptop_card.jpg" alt="" />
-                </div>
-              </a>
-              <div class="item-info">
-                <a href="/product.html"
-                  ><h2>Kisayomi Noutbook Pro 12 max edition</h2></a
-                >
-                <p>
-                  Price: <span>44.990 </span
-                  ><i class="fa-solid fa-ruble-sign"></i>
-                </p>
-                <div class="item-info-specs">
-                  <ul>
-                    <h3>Product Specifications:</h3>
-                    <li><span>SSD</span>: 512GB</li>
-                    <li><span>CPU</span>: Amude R2222</li>
-                    <li><span>Warranty</span>: 1 year</li>
-                    <li><span>OS</span>: Doors 11</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
           <div class="swiper-pagination"></div>
         </div>

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf.urls import handler403, handler404
 
 urlpatterns = [
   path("", views.Home ,name="home"),
@@ -21,3 +22,5 @@ urlpatterns = [
   path("myaccount/settings", views.AccountSettings, name="account-settings"),
   path("catalog/", views.Catalog, name="catalog"),
 ]
+handler404 = "base.views.NotFound"
+handler403 = "base.views.AccessDenied"
